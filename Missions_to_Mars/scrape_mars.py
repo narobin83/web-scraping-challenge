@@ -17,3 +17,20 @@ def mars_news(browser):
 
     html = browser.html
     news_soup = BeautifulSoup(html, "html.parser")
+
+    # Parse Results HTML with BeautifulSoup
+    # Find Everything Inside:
+    #   <ul class="item_list">
+    #     <li class="slide">
+    try:
+        slide_element = news_soup.select_one("ul.item_list li.slide")
+        slide_element.find("div", class_="content_title")
+
+        # Scrape the Latest News Title
+        # Use Parent Element to Find First <a> Tag and Save it as news_title
+        news_title = slide_element.find("div", class_="content_title").get_text()
+
+        news_paragraph = slide_element.find("div", class_="article_teaser_body").get_text()
+    except AttributeError:
+        return None, None
+    return news_title, news_paragraph
