@@ -34,3 +34,12 @@ def mars_news(browser):
     except AttributeError:
         return None, None
     return news_title, news_paragraph
+
+def featured_image(browser):
+    # Visit the NASA JPL (Jet Propulsion Laboratory) Site
+    url = "https://spaceimages-mars.com/"
+    browser.visit(url)
+
+    full_image_button =  browser.links.find_by_partial_text('FULL IMAGE')
+    full_image_button.click()
+    
