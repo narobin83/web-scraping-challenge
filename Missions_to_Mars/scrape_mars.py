@@ -40,6 +40,17 @@ def featured_image(browser):
     url = "https://spaceimages-mars.com/"
     browser.visit(url)
 
+    html = browser.html
+    image_soup = BeautifulSoup(html, "html.parser")
+
     full_image_button =  browser.links.find_by_partial_text('FULL IMAGE')
     full_image_button.click()
-    
+
+    img = image_soup.find(class_="headerimage fade-in")
+    try:
+        img_url = img.get("src")
+    except AttributeError:
+        return None 
+   # Use Base URL to Create Absolute URL
+    featured_img_url = f"https://spaceimages-mars.com/{img_url}"
+    return featured_img_url
