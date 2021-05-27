@@ -11,3 +11,13 @@ mongo = PyMongo(app)
 def index():
     mars = mongo.db.mars.find_one()
     return render_template("./index.html", mars=mars)
+
+@app.route("/scrape")
+def scrapper():
+    mars = mongo.db.mars
+    mars_data = nasa_scraper.scrape_all()
+    mars.update({}, mars_data, upsert=True)
+    return "Scraping Successful"
+
+if __name__ == "__main__":
+    app.run(debug=True)
