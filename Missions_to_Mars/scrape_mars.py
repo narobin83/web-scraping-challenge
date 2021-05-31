@@ -37,7 +37,6 @@ def mars_news(browser):
     return news_title, news_paragraph
 
 def featured_image(browser):
-    # Visit the NASA JPL (Jet Propulsion Laboratory) Site
     url = "https://spaceimages-mars.com/"
     browser.visit(url)
 
@@ -47,17 +46,12 @@ def featured_image(browser):
     full_image_button =  browser.links.find_by_partial_text('FULL IMAGE')
     full_image_button.click()
 
-    img = image_soup.find(class_="headerimage fade-in")
-    try:
-        img_url = img.get("src")
-    except AttributeError:
-        return None 
-   # Use Base URL to Create Absolute URL
+    img_url = image_soup.find(class_="headerimage fade-in").get("src")
+      
     featured_img_url = f"https://spaceimages-mars.com/{img_url}"
     return featured_img_url
 
 mars_facts = pd.read_html("https://galaxyfacts-mars.com/")
-print(mars_facts)
 mars_facts_df.reset_index(inplace=True)
 mars_facts_df.columns=["ID", "Properties", "Mars", "Earth"]
 mars_facts_df
@@ -126,4 +120,4 @@ def scrape_all():
     return data 
 
 if __name__ == "__main__":
-    print(scrape_all())
+    
