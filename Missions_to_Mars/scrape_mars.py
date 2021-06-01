@@ -51,10 +51,9 @@ def featured_image(browser):
     featured_img_url = f"https://spaceimages-mars.com/{img_url}"
     return featured_img_url
 
-mars_facts = pd.read_html("https://galaxyfacts-mars.com/")
+mars_facts_df = pd.read_html("https://galaxyfacts-mars.com/")
 mars_facts_df.reset_index(inplace=True)
 mars_facts_df.columns=["ID", "Properties", "Mars", "Earth"]
-mars_facts_df
 
 def hemisphere(browser):
     # Visit the USGS Astrogeology Science Center Site
@@ -113,11 +112,11 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": img_url,
         "facts": facts,
-        "hemispheres": hemisphere_image_urls,
+        "hemispheres": hemisphere_image_urls
         
     }
     browser.quit()
     return data 
 
 if __name__ == "__main__":
-    
+     print(scrape_all())
