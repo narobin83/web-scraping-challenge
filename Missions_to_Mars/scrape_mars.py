@@ -54,6 +54,7 @@ def featured_image(browser):
 mars_facts_df = pd.read_html("https://galaxyfacts-mars.com/")
 mars_facts_df.reset_index(inplace=True)
 mars_facts_df.columns=["ID", "Properties", "Mars", "Earth"]
+mars_facts_df
 
 def hemisphere(browser):
     # Visit the USGS Astrogeology Science Center Site
