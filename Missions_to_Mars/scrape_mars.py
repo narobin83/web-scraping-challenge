@@ -98,13 +98,12 @@ def scrape_hemisphere(html_text):
     }
     return hemisphere
 
-def scrape_all():
+def scrape():
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser("chrome", **executable_path, headless=False)
     news_title, news_paragraph = mars_news(browser)
     img_url = featured_image(browser)
-    mars_weather = twitter_weather(browser)
-    facts = mars_facts
+    facts = mars_facts_df
     hemisphere_image_urls = hemisphere(browser)
     
     data = {
